@@ -1,0 +1,46 @@
+
+.navbar-wrapper {
+  position: relative;
+}
+
+.custom-navbar {
+  background-color: #009fe5 !important;
+  height: 121px;
+}
+
+.bottom-bar {
+  background-color: #143976;
+  height: 48px;
+  padding: 2px;
+}
+
+.sieteLogo{
+   height:107px;
+   margin-left: 66px;
+   margin-bottom: 10px;
+}
+
+.navTextLeft{
+  color:#ffffff;
+  margin-left:73px;
+  font-size: medium;
+  text-decoration: none;
+  float:left;
+  
+
+  
+  
+}
+
+.navTextRight{
+  color:#ffffff;
+  font-size: medium;
+  margin-right:73px;
+  float:right;
+  text-decoration: none;
+  
+}
+
+.bottom-bar-content{
+  margin-top: 10px;
+}
