@@ -1,0 +1,6 @@
+.formBox {
+    border: 1px black solid;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
