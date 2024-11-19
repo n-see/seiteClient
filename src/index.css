@@ -44,3 +44,46 @@
 .bottom-bar-content{
   margin-top: 10px;
 }
+
+.footerBody{
+  position: relative;
+  background-color:#143976;
+  color:#ffffff;
+  height:300px;
+}
+
+.sieteFootText{
+  color:#ffffff;
+  font-size: x-large;
+  margin-left: 175px;
+}
+
+.versionText{
+  margin-left: -65px;
+  color: grey;
+}
+
+.sieteInfo{
+  margin-bottom: 123px;
+  margin-left: 175px;
+  word-wrap: break-word; /* Ensures long words break */
+  line-height: 1.5;
+}
+
+.followUs{
+  color:#ffffff;
+  font-size: x-large;
+  margin-left: -150px;
+
+
+
+}
+
+.codehackSites{
+  color:#ffffff;
+  font-size: x-large;
+  margin-left: 50px;
+
+}
+
+

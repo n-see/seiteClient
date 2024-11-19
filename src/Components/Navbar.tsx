@@ -24,6 +24,7 @@ const NavbarComponent = () => {
                         <a href="#contact"className='navTextLeft'>Contact Us</a>
                     </div>
                     <div className="right-links">
+                        <a href="#login"className='navTextRight'>Dashboard</a>
                         <a href="#login"className='navTextRight'>Login</a>
                     </div>
                     </Container>
