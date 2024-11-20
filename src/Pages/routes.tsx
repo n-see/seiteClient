@@ -3,7 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import HomePage from "./HomePage";
 import Login from "./Login";
 import CreateAccount from "./CreateAccount/CreateAccount";
-import Dashboard from "./Dashboard";
+import Dashboard from "./Dashboard/Dashboard";
 import ContactUs from "./ContactUs";
 import StudentProfile from "./StudentProfile";
 
