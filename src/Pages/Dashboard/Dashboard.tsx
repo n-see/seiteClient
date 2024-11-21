@@ -1,7 +1,13 @@
 import { Button } from "@chakra-ui/react";
 import "./dashboard.css";
+import { Modal } from "react-bootstrap";
+import { useState } from "react";
 
 const Dashboard = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
       <h1 className="text-center">Student Caseload</h1>
@@ -24,7 +30,16 @@ const Dashboard = () => {
             </div>
           </div>
           <div className="col d-flex justify-content-center align-items-center">
-            <Button size="xl" colorPalette={"blue"} className="addStudentButton">Add Student to Caseload</Button>
+            <Button size="xl" colorPalette={"blue"} className="addStudentButton" onClick={handleShow} >Add Student to Caseload</Button>
+
+          {/* add student modal */}
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title></Modal.Title>
+            </Modal.Header>
+
+          </Modal>
+
           </div>
         </div>
       </div>
