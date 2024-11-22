@@ -91,4 +91,16 @@ html, body{
 
 }
 
+.footerLogo{
+ height:85px;
+ margin-bottom: -90px;
+ margin-top: 10px;
+}
+
+.codeHackLogo{
+  margin-top: 10px;
+  height:65px;
+  margin-left: 290px;
+
+}
 
