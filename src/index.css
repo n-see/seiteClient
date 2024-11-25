@@ -2,6 +2,7 @@
 
 html, body{
   font-family: "Roboto", sans-serif;
+  background-color: #EEF2F4 !important;
 }
 
 .navbar-wrapper {
@@ -92,15 +93,26 @@ html, body{
 }
 
 .footerLogo{
+position:relative;
  height:85px;
  margin-bottom: -90px;
  margin-top: 10px;
 }
 
 .codeHackLogo{
+  position:relative;
   margin-top: 10px;
   height:65px;
   margin-left: 290px;
 
+}
+
+.contactUs{
+  display:flex;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 165px;
+  font-weight:300;
+  font-size: 40px;
 }
 

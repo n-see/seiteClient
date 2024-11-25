@@ -2,6 +2,8 @@
 import NavbarComponent from './Components/Navbar';
 import FooterComponent from './Components/Footer';
 import './index.css';
+import ContactForm from './Pages/ContactUs';
+import ThankYouPage from './Pages/ThankYou';
 
 
 
@@ -9,6 +11,8 @@ const App = () => {
   return (
     <>
   <NavbarComponent/>
+  <ContactForm/>
+  {/* <ThankYouPage/> */}
   <FooterComponent/>
 
     </>
