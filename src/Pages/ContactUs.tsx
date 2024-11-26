@@ -8,8 +8,8 @@ function ContactForm() {
   
     <Container className="container-fluid">
       <Row className="justify-content-center">
-        <Col md={11} lg={11}>
-          <div className="p-4 bg-light rounded shadow">
+        <Col md={11} lg={11} className="p-4">
+          <div className="bg-light rounded shadow">
            
             <p className="text-muted mb-3">
               Thank you for your interest in SIETE. We are excited to show you
