@@ -18,15 +18,15 @@ const NavbarComponent = () => {
                 </Container>
             </Navbar>
             
-            <div>
-                <Container>
-                    <div >
-                        <Link to={"/"} >Home</Link>
-                        <Link to={"/contact"} >Contact Us</Link>
+            <div className="bottom-bar">
+                <Container className="bottom-bar-content">
+                    <div className="left-links">
+                        <a href="#home" className='navTextLeft'>Home</a>
+                        <a href="#home" className='navTextLeft'>Contact Us</a>
                     </div>
-                    <div >
-                        <Link to={'/dashboard'} >Dashboard</Link>
-                        <Link to={'/login'} >Login</Link>
+                    <div className="right-links">
+                        <a href="#home" className='navTextRight'>Dashboard</a>
+                        <a href="#home" className='navTextRight'>Login</a>
                     </div>
                     </Container>
             </div>

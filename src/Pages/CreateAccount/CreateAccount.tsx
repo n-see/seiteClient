@@ -4,6 +4,8 @@ import { Field } from "../../components/ui/field";
 import { useState } from "react";
 import { PasswordInput } from "../../components/ui/password-input";
 import "./createAccount.css";
+import axios from "axios";
+import { BASE_URL } from "../../constant";
 
 interface FormValues {
   lastName: string;
@@ -12,6 +14,13 @@ interface FormValues {
   password: string;
   confirmPassword: string;
 }
+interface User {
+  id: number;
+  lastName: string;
+  firstName: string;
+  username: string;
+  password: string;
+}
 
 const CreateAccount = () => {
   const [newUser, setNewUser] = useState({
@@ -19,7 +28,6 @@ const CreateAccount = () => {
     firstName: "",
     username: "",
     password: "",
-    confirmPassword: "",
   });
   const [passwordValidation, setPasswordValidation] = useState("");
   const [confirmPasswordValidation, setConfirmPasswordValidation] =
@@ -31,7 +39,15 @@ const CreateAccount = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(() => addUser(newUser));
+
+  const addUser = (addingUser:{}) => {
+    axios
+    .post(BASE_URL + "User/AddUser", addingUser)
+    .then(res => res.data)
+    .catch(error => error.message)
+
+  }
 
   return (
     <>
@@ -131,11 +147,7 @@ const CreateAccount = () => {
                   <PasswordInput
                     //  {...register("confirmPassword", { required: passwordValidation != confirmPasswordValidation ? "Passwords must match" : ""})}
                     onChange={(e) => (
-                      setConfirmPasswordValidation(e.target.value),
-                      setNewUser({
-                        ...newUser,
-                        confirmPassword: e.target.value,
-                      })
+                      setConfirmPasswordValidation(e.target.value)
                     )}
                   ></PasswordInput>
                   {passwordValidation != confirmPasswordValidation ? (
