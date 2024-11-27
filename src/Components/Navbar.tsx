@@ -1,5 +1,6 @@
 import { Navbar,Container } from 'react-bootstrap';
 import Logo from '../assets/Logo.png'
+import { Link, NavLink } from 'react-router-dom';
 
 
 const NavbarComponent = () => {
@@ -17,15 +18,15 @@ const NavbarComponent = () => {
                 </Container>
             </Navbar>
             
-            <div className="bottom-bar">
-                <Container className="bottom-bar-content">
-                    <div className="left-links">
-                        <a href="#home" className='navTextLeft'>Home</a>
-                        <a href="#contact"className='navTextLeft'>Contact Us</a>
+            <div>
+                <Container>
+                    <div >
+                        <Link to={"/"} >Home</Link>
+                        <Link to={"/contact"} >Contact Us</Link>
                     </div>
-                    <div className="right-links">
-                        <a href="#login"className='navTextRight'>Dashboard</a>
-                        <a href="#login"className='navTextRight'>Login</a>
+                    <div >
+                        <Link to={'/dashboard'} >Dashboard</Link>
+                        <Link to={'/login'} >Login</Link>
                     </div>
                     </Container>
             </div>
