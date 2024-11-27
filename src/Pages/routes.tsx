@@ -1,7 +1,7 @@
 
 import { createBrowserRouter } from "react-router-dom";
 import HomePage from "./HomePage";
-import Login from "./Login";
+import Login from "./Login/Login";
 import CreateAccount from "./CreateAccount/CreateAccount";
 import Dashboard from "./Dashboard/Dashboard";
 import ContactUs from "./ContactUs";
