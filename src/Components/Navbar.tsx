@@ -8,25 +8,25 @@ const NavbarComponent = () => {
         <div className="navbar-wrapper">
             <Navbar className="custom-navbar" data-bs-theme="dark">
                 <Container>
-                    <Navbar.Brand href="#home">
+                    <NavLink to={'/'}>
                     <img
                             src={Logo} 
                             alt="Siete Logo" 
                             className='sieteLogo'
                         />
-                    </Navbar.Brand>
+                    </NavLink>
                 </Container>
             </Navbar>
             
             <div className="bottom-bar">
                 <Container className="bottom-bar-content">
                     <div className="left-links">
-                        <a href="#home" className='navTextLeft'>Home</a>
-                        <a href="#home" className='navTextLeft'>Contact Us</a>
+                        <Link to={'/'} className='navTextLeft'>Home</Link>
+                        <Link to={'/Contact'} className='navTextLeft'>Contact Us</Link>
                     </div>
                     <div className="right-links">
-                        <a href="#home" className='navTextRight'>Dashboard</a>
-                        <a href="#home" className='navTextRight'>Login</a>
+                        <Link to={'/Dashboard'} className='navTextRight'>Dashboard</Link>
+                        <Link to={"Login"} className='navTextRight'>Login</Link>
                     </div>
                     </Container>
             </div>

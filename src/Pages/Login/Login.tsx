@@ -31,7 +31,7 @@ const Login = () => {
   return (
     <>
       <Text>Login</Text>
-      <div className="container-fluid loginBox">
+      <div className="container loginBox d-flex-justify-content-center">
         <div className="row">
           <div className="col">
           <Field

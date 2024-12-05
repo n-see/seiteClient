@@ -15,9 +15,10 @@ import FooterComponent from './components/Footer.tsx'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider>
-      <NavbarComponent/>
-      <RouterProvider router={router}></RouterProvider>
-      <FooterComponent/>
+      
+      <RouterProvider router={router}>
+
+      </RouterProvider>
     </Provider>
  
   </StrictMode>,
