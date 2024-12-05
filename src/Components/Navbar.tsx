@@ -25,8 +25,10 @@ const NavbarComponent = () => {
                         <Link to={'/Contact'} className='navTextLeft'>Contact Us</Link>
                     </div>
                     <div className="right-links">
+
                         <Link to={'/Dashboard'} className='navTextRight'>Dashboard</Link>
                         <Link to={"Login"} className='navTextRight'>Login</Link>
+
                     </div>
                     </Container>
             </div>
