@@ -28,6 +28,7 @@ const NavbarComponent = () => {
 
                         <Link to={'/Dashboard'} className='navTextRight'>Dashboard</Link>
                         <Link to={"Login"} className='navTextRight'>Login</Link>
+                        <Link to={'/CreateAccount'} className='navTextRight'>Create Account</Link>
 
                     </div>
                     </Container>
