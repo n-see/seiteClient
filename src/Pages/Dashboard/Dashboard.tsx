@@ -1,10 +1,13 @@
 import { Button, HStack, Input } from "@chakra-ui/react";
 import "./dashboard.css";
-import { Modal } from "react-bootstrap";
-import { useState } from "react";
+import { Form, Modal } from "react-bootstrap";
+import { useEffect, useState } from "react";
 import { Field } from "../../components/ui/field";
 import { useForm } from "react-hook-form";
 import { Radio, RadioGroup } from "../../components/ui/radio";
+import { useNavigate } from "react-router";
+import { BASE_URL } from "../../constant";
+import axios from "axios";
 
 interface FormValues {
   firstName: string;
@@ -17,9 +20,26 @@ interface FormValues {
   secondaryPhone: string;
   address: string;
 }
+interface Student {
+    id:number,
+    teacherId: number,
+    firstName:string,
+    lastName:string,
+    SSID: number,
+    DOB: number,
+    gender:string,
+    primaryDisability:string,
+    primaryPhone:string,
+    secondaryPhone:string,
+    address:string,
+    profileImage:string
+}
 
 const Dashboard = () => {
-  const [newStudent, setNewStudent] = useState({
+  let navigate = useNavigate();
+  const [newStudent, setNewStudent] = useState<Student>({
+    id:0,
+    teacherId:0,
     firstName: "",
     lastName: "",
     SSID: 0,
@@ -28,8 +48,36 @@ const Dashboard = () => {
     primaryDisability: "",
     primaryPhone: "",
     secondaryPhone: "",
-    address: ""
+    address: "",
+    profileImage: ""
   })
+  const [data, setData] = useState<Student[]>([]);
+
+  const [localS, setLocalS] = useState(() => {
+    return localStorage.getItem("UserData") ? JSON.parse(localStorage.getItem("UserData")!) : {userId: 0, publisherName: ""} 
+})
+  // validate if logged in
+  useEffect(() => {
+    if (!checkToken()) {
+        navigate('/login')
+    }
+    else{
+        setLocalS(() => {
+            return localStorage.getItem("UserData") ? JSON.parse(localStorage.getItem("UserData")!) : {userId: 0, publisherName: ""}
+            
+        })
+        
+    
+    fetchData();
+    }
+}, [])
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("UserData")!);
+    setNewStudent({...newStudent, teacherId: userData.userId! })
+  }, [])
+    
+
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -40,6 +88,37 @@ const Dashboard = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<FormValues>();
+
+  const fetchData = () => {
+    axios
+        .get(BASE_URL + "Expense/GetStudentByUserId/" + localS.userId)
+        .then((response) => {
+            setData(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+};
+
+  const checkToken = () => {
+    let result = false;
+    let lsData = localStorage.getItem("Token");
+    if (lsData && lsData != null) {
+        result = true;
+    }
+    return result;
+};
+
+  const handleImage = async (e:any) => {
+    let file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+        console.log(reader.result);
+        setNewStudent({ ...newStudent, profileImage: String(reader.result) })
+    };
+    reader.readAsDataURL(file);
+};
+
 
   const onSubmit = handleSubmit((data) => console.log(data));
 
@@ -220,6 +299,11 @@ const Dashboard = () => {
                       }
                     ></Input>
                   </Field>
+                  <Form.Group className="mb-3 " controlId="Image">
+                                <Form.Label>Pick an Image</Form.Label>
+                                <Form.Control type="file" placeholder="Select an Image from file" accept="image/png, image/jpg" onChange={handleImage} />
+
+                            </Form.Group>
                   <Button type="submit" colorPalette={"blue"}>
                   Submit
                 </Button>

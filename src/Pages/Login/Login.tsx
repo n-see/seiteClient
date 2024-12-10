@@ -49,6 +49,7 @@ const Login = () => {
   let token = await axiosLogin(userData)
   if (token != null) {
     localStorage.setItem("Token", token);
+    console.log(token);
     await GetLoggedInUser(user.username);
     
   }
