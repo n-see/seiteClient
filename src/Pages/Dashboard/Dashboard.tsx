@@ -22,34 +22,34 @@ interface FormValues {
 }
 interface Student {
     id:number,
-    teacherId: number,
+    userId: number,
     firstName:string,
     lastName:string,
-    SSID: number,
-    DOB: number,
+    SSId: number,
+    DOB: Date,
     gender:string,
     primaryDisability:string,
-    primaryPhone:string,
-    secondaryPhone:string,
-    address:string,
-    profileImage:string
+    primaryContact:string,
+    secondaryContact:string,
+    homeAddress:string,
+    profilePicture:string
 }
 
 const Dashboard = () => {
   let navigate = useNavigate();
   const [newStudent, setNewStudent] = useState<Student>({
     id:0,
-    teacherId:0,
+    userId:0,
     firstName: "",
     lastName: "",
-    SSID: 0,
-    DOB: 0,
+    SSId: 0,
+    DOB: new Date(),
     gender: "",
     primaryDisability: "",
-    primaryPhone: "",
-    secondaryPhone: "",
-    address: "",
-    profileImage: ""
+    primaryContact: "",
+    secondaryContact: "",
+    homeAddress: "",
+    profilePicture: ""
   })
   const [data, setData] = useState<Student[]>([]);
 
@@ -74,7 +74,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("UserData")!);
-    setNewStudent({...newStudent, teacherId: userData.userId! })
+    setNewStudent({...newStudent, userId: userData.userId! })
   }, [])
     
 
@@ -91,7 +91,7 @@ const Dashboard = () => {
 
   const fetchData = () => {
     axios
-        .get(BASE_URL + "Expense/GetStudentByUserId/" + localS.userId)
+        .get(BASE_URL + "Student/GetStudentByUserId/" + localS.userId)
         .then((response) => {
             setData(response.data);
         })
@@ -114,13 +114,19 @@ const Dashboard = () => {
     const reader = new FileReader();
     reader.onloadend = () => {
         console.log(reader.result);
-        setNewStudent({ ...newStudent, profileImage: String(reader.result) })
+        setNewStudent({ ...newStudent, profilePicture: String(reader.result) })
     };
     reader.readAsDataURL(file);
 };
 
+const addStudent = () => {
+  console.log(newStudent)
+  axios.post(BASE_URL + "Student/AddStudent", newStudent)
+  .then(res => res.data)
+  .catch(error => error.message)
+}
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit(addStudent);
 
   return (
     <>
@@ -197,7 +203,7 @@ const Dashboard = () => {
                         required: "SSID is required",
                       })}
                       onChange={(e) =>
-                        setNewStudent({ ...newStudent, SSID: Number(e.target.value) })
+                        setNewStudent({ ...newStudent, SSId: Number(e.target.value) })
                       }
                     ></Input>
                   </Field>
@@ -212,8 +218,11 @@ const Dashboard = () => {
                       {...register("DOB", {
                         required: "DOB is required",
                       })}
-                      onChange={(e) =>
-                        setNewStudent({ ...newStudent, DOB: Number(e.target.value) })
+                      onChange={(e) =>{
+                        console.log(e.target.value)
+                        setNewStudent({ ...newStudent, DOB: e.target.value })
+
+                      }
                       }
                     ></Input>
                   </Field>
@@ -235,7 +244,7 @@ const Dashboard = () => {
                     invalid={!!errors.primaryDisability}
                     errorText={errors.primaryDisability?.message}
                   >
-                    <Input type="date"
+                    <Input
                       {...register("primaryDisability", {
                         required: "Primary Disability is required",
                       })}
@@ -259,7 +268,7 @@ const Dashboard = () => {
                       })}
                       
                       onChange={(e) =>
-                        setNewStudent({ ...newStudent, primaryPhone: e.target.value })
+                        setNewStudent({ ...newStudent, primaryContact: e.target.value })
                       }
                     ></Input>
                   </Field>
@@ -278,7 +287,7 @@ const Dashboard = () => {
                       })}
                       
                       onChange={(e) =>
-                        setNewStudent({ ...newStudent, secondaryPhone: e.target.value })
+                        setNewStudent({ ...newStudent, secondaryContact: e.target.value })
                       }
                     ></Input>
 
@@ -295,7 +304,7 @@ const Dashboard = () => {
                       })}
                       
                       onChange={(e) =>
-                        setNewStudent({ ...newStudent, address: e.target.value })
+                        setNewStudent({ ...newStudent, homeAddress: e.target.value })
                       }
                     ></Input>
                   </Field>
