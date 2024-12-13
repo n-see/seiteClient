@@ -26,7 +26,7 @@ interface Student {
     firstName:string,
     lastName:string,
     SSId: number,
-    DOB: Date,
+    DOB: number,
     gender:string,
     primaryDisability:string,
     primaryContact:string,
@@ -43,7 +43,7 @@ const Dashboard = () => {
     firstName: "",
     lastName: "",
     SSId: 0,
-    DOB: new Date(),
+    DOB: 0,
     gender: "",
     primaryDisability: "",
     primaryContact: "",
@@ -220,7 +220,7 @@ const addStudent = () => {
                       })}
                       onChange={(e) =>{
                         console.log(e.target.value)
-                        setNewStudent({ ...newStudent, DOB: e.target.value })
+                        setNewStudent({ ...newStudent, DOB: parseInt(e.target.value) })
 
                       }
                       }
