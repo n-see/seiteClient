@@ -4,6 +4,10 @@ import { Field } from "../../components/ui/field";
 import { useForm } from "react-hook-form";
 import { PasswordInput } from "../../components/ui/password-input";
 import "./login.css"
+import axios from "axios";
+import { BASE_URL } from "../../constant";
+import { useNavigate } from "react-router-dom";
+
 
 interface FormValues {
   username: string;
@@ -11,8 +15,17 @@ interface FormValues {
 
 }
 
+interface User{
+  id: number,
+  username: string;
+  password: string;
+}
+
 
 const Login = () => {
+
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({
     username: "",
     password: ""
@@ -27,7 +40,46 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
-  const onSubmit = handleSubmit((data) => console.log(data));
+ const login = async () => {
+  let userData= {
+    id:0,
+    username: user.username,
+    password: user.password
+  }
+  let token = await axiosLogin(userData)
+  if (token != null) {
+    localStorage.setItem("Token", token);
+    await GetLoggedInUser(user.username);
+    
+  }
+  navigate('/Dashboard')
+ }
+
+ const axiosLogin = async (loginUser:User) => {
+  let outsideData = "";
+    try{
+        const res = await axios.post(BASE_URL + "User/Login", loginUser);
+        let data = res.data
+        outsideData = data.token
+        localStorage.setItem("Token", data.token)
+        console.log(res);
+    } catch(error) {
+        console.log(error)
+    }
+    return outsideData
+    
+    
+ }
+
+ const GetLoggedInUser = async (username:string) => {
+  let res = await axios 
+  .get(BASE_URL + "User/GetUserByUsername/" + username)
+  let userData = res.data;
+      console.log(userData)
+      localStorage.setItem("UserData", JSON.stringify(userData) )
+}
+
+  const onSubmit = handleSubmit(() => login());
   return (
     <>
       <Text>Login</Text>
@@ -63,7 +115,7 @@ const Login = () => {
                     )}
                   ></PasswordInput>
                 </Field>
-                <Button type="submit" colorPalette={"blue"}>
+                <Button type="submit" colorPalette={"blue"} onClick={onSubmit}>
                   Login
                 </Button>
               
