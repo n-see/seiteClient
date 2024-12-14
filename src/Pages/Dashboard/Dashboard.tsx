@@ -1,7 +1,7 @@
 import { Button, HStack, Icon, IconButton, Input, Table } from "@chakra-ui/react";
 import "./dashboard.css";
 import { Form, Modal } from "react-bootstrap";
-import { isValidElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Field } from "../../components/ui/field";
 import { useForm } from "react-hook-form";
 import { Radio, RadioGroup } from "../../components/ui/radio";

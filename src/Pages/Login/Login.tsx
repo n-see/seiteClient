@@ -30,9 +30,9 @@ const Login = () => {
     username: "",
     password: ""
   })
-  const [passwordValidation, setPasswordValidation] = useState("");
-  const [confirmPasswordValidation, setConfirmPasswordValidation] =
-    useState("");
+  // const [passwordValidation, setPasswordValidation] = useState("");
+  // const [confirmPasswordValidation, setConfirmPasswordValidation] =
+  //   useState("");
 
   const {
     register,
@@ -114,8 +114,8 @@ const Login = () => {
                       required: "Password is required",
                     })}
                     onChange={(e) => (
-                      setUser({ ...user, password: e.target.value }),
-                      setPasswordValidation(e.target.value)
+                      setUser({ ...user, password: e.target.value })
+                      // setPasswordValidation(e.target.value)
                     )}
                   ></PasswordInput>
                 </Field>
