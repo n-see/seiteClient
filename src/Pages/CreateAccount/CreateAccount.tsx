@@ -15,13 +15,13 @@ interface FormValues {
   password: string;
   confirmPassword: string;
 }
-interface User {
-  id: number;
-  lastName: string;
-  firstName: string;
-  username: string;
-  password: string;
-}
+// interface User {
+//   id: number;
+//   lastName: string;
+//   firstName: string;
+//   username: string;
+//   password: string;
+// }
 
 const CreateAccount = () => {
 
