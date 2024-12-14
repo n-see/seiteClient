@@ -6,6 +6,7 @@ import { PasswordInput } from "../../components/ui/password-input";
 import "./createAccount.css";
 import axios from "axios";
 import { BASE_URL } from "../../constant";
+import { useNavigate } from "react-router";
 
 interface FormValues {
   lastName: string;
@@ -23,6 +24,8 @@ interface User {
 }
 
 const CreateAccount = () => {
+
+  let navigate = useNavigate();
   const [newUser, setNewUser] = useState({
     lastName: "",
     firstName: "",
@@ -47,7 +50,7 @@ const CreateAccount = () => {
     .post(BASE_URL + "User/AddUsers", addingUser)
     .then(res => res.data)
     .catch(error => error.message)
-
+    navigate("/login")
   }
 
   return (

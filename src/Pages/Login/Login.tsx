@@ -1,4 +1,4 @@
-import { Button, Input, Text } from "@chakra-ui/react";
+import { Button, Container, Input, Text } from "@chakra-ui/react";
 import { useState } from "react";
 import { Field } from "../../components/ui/field";
 import { useForm } from "react-hook-form";
@@ -49,6 +49,7 @@ const Login = () => {
   let token = await axiosLogin(userData)
   if (token != null) {
     localStorage.setItem("Token", token);
+    console.log(token);
     await GetLoggedInUser(user.username);
     
   }
@@ -82,8 +83,11 @@ const Login = () => {
   const onSubmit = handleSubmit(() => login());
   return (
     <>
+      {/* <div className="container loginBox d-flex-justify-content-center"> */}
+      <Container>
       <Text>Login</Text>
-      <div className="container loginBox d-flex-justify-content-center">
+
+     
         <div className="row">
           <div className="col">
           <Field
@@ -123,7 +127,8 @@ const Login = () => {
           <div className="col"></div>
         </div>
         <Text> Due to the confidentiality of student data, do not save your password to your internet browser.</Text>
-      </div>
+      {/* </div> */}
+      </Container>
     </>
   )
 }
