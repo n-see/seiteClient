@@ -1,13 +1,16 @@
-import { Button, HStack, Input } from "@chakra-ui/react";
+import { Button, HStack, Icon, IconButton, Input, Table } from "@chakra-ui/react";
 import "./dashboard.css";
 import { Form, Modal } from "react-bootstrap";
-import { useEffect, useState } from "react";
+import { isValidElement, useEffect, useState } from "react";
 import { Field } from "../../components/ui/field";
 import { useForm } from "react-hook-form";
 import { Radio, RadioGroup } from "../../components/ui/radio";
 import { useNavigate } from "react-router";
 import { BASE_URL } from "../../constant";
 import axios from "axios";
+import { Image } from "@chakra-ui/react"
+import { RxAvatar } from "react-icons/rx";
+import { FaRegTrashAlt } from "react-icons/fa";
 
 interface FormValues {
   firstName: string;
@@ -21,25 +24,28 @@ interface FormValues {
   address: string;
 }
 interface Student {
-    id:number,
-    userId: number,
-    firstName:string,
-    lastName:string,
-    SSId: number,
-    DOB: number,
-    gender:string,
-    primaryDisability:string,
-    primaryContact:string,
-    secondaryContact:string,
-    homeAddress:string,
-    profilePicture:string
+  id: number,
+  userId: number,
+  firstName: string,
+  lastName: string,
+  SSId: number,
+  DOB: number,
+  gender: string,
+  primaryDisability: string,
+  primaryContact: string,
+  secondaryContact: string,
+  homeAddress: string,
+  profilePicture: string
+  isEnrolled: boolean
+  isDeleted: boolean
 }
 
+
 const Dashboard = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [newStudent, setNewStudent] = useState<Student>({
-    id:0,
-    userId:0,
+    id: 0,
+    userId: 0,
     firstName: "",
     lastName: "",
     SSId: 0,
@@ -49,36 +55,38 @@ const Dashboard = () => {
     primaryContact: "",
     secondaryContact: "",
     homeAddress: "",
-    profilePicture: ""
+    profilePicture: "",
+    isEnrolled: true,
+    isDeleted: false,
   })
   const [data, setData] = useState<Student[]>([]);
 
   const [localS, setLocalS] = useState(() => {
-    return localStorage.getItem("UserData") ? JSON.parse(localStorage.getItem("UserData")!) : {userId: 0, publisherName: ""} 
-})
+    return localStorage.getItem("UserData") ? JSON.parse(localStorage.getItem("UserData")!) : { userId: 0, publisherName: "" }
+  })
   // validate if logged in
   useEffect(() => {
     if (!checkToken()) {
-        navigate('/login')
+      navigate('/login')
     }
-    else{
-        setLocalS(() => {
-            return localStorage.getItem("UserData") ? JSON.parse(localStorage.getItem("UserData")!) : {userId: 0, publisherName: ""}
-            
-        })
-        
-    
-    fetchData();
+    else {
+      setLocalS(() => {
+        return localStorage.getItem("UserData") ? JSON.parse(localStorage.getItem("UserData")!) : { userId: 0, publisherName: "" }
+      })
+
+
+      fetchData();
     }
-}, [])
+  }, [])
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("UserData")!);
-    setNewStudent({...newStudent, userId: userData.userId! })
+    setNewStudent({ ...newStudent, userId: userData.userId! })
   }, [])
-    
+
 
   const [show, setShow] = useState(false);
+  const [totalStudents, setTotalStudents] = useState(0)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -90,41 +98,55 @@ const Dashboard = () => {
   } = useForm<FormValues>();
 
   const fetchData = () => {
+    console.log(localS + "local")
     axios
-        .get(BASE_URL + "Student/GetStudentByUserId/" + localS.userId)
-        .then((response) => {
-            setData(response.data);
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-};
+      .get(BASE_URL + "Student/GetStudentByUserId/" + localS.userId)
+      .then((response) => {
+        setData(response.data);
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    console.log(data);
+  };
 
   const checkToken = () => {
     let result = false;
     let lsData = localStorage.getItem("Token");
     if (lsData && lsData != null) {
-        result = true;
+      result = true;
     }
     return result;
-};
+  };
 
-  const handleImage = async (e:any) => {
+  const handleImage = async (e: any) => {
     let file = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
-        console.log(reader.result);
-        setNewStudent({ ...newStudent, profilePicture: String(reader.result) })
+      console.log(reader.result);
+      setNewStudent({ ...newStudent, profilePicture: String(reader.result) })
     };
     reader.readAsDataURL(file);
-};
+  };
 
-const addStudent = () => {
-  console.log(newStudent)
-  axios.post(BASE_URL + "Student/AddStudent", newStudent)
-  .then(res => res.data)
-  .catch(error => error.message)
-}
+  const addStudent = () => {
+    console.log(newStudent)
+    axios.post(BASE_URL + "Student/AddStudent", newStudent)
+      .then(res => res.data)
+      .catch(error => error.message)
+    handleClose()
+  }
+
+  const removeStudent = (removeId: number) => {
+    console.log("remove student")
+    setData((oldData) => oldData.map(studentToRemove => studentToRemove.id === removeId ? { ...studentToRemove, isDeleted: true } : studentToRemove))
+    console.log(data)
+  }
+  useEffect(() => {
+    setTotalStudents(data.length)
+  }, [data])
+
 
   const onSubmit = handleSubmit(addStudent);
 
@@ -139,7 +161,7 @@ const addStudent = () => {
               <h4 className="text-center">Students Add/Removed</h4>
               <div className="row">
                 <div className="col ">
-                  <h2>14</h2>
+                  <h2>{totalStudents}</h2>
                   <p>Added Students</p>
                 </div>
                 <div className="col">
@@ -198,7 +220,7 @@ const addStudent = () => {
                     errorText={errors.SSID?.message}
                   >
                     <Input
-                    type="number"
+                      type="number"
                       {...register("SSID", {
                         required: "SSID is required",
                       })}
@@ -218,7 +240,7 @@ const addStudent = () => {
                       {...register("DOB", {
                         required: "DOB is required",
                       })}
-                      onChange={(e) =>{
+                      onChange={(e) => {
                         console.log(e.target.value)
                         setNewStudent({ ...newStudent, DOB: parseInt(e.target.value) })
 
@@ -229,13 +251,13 @@ const addStudent = () => {
                   {/* Gender section */}
                   <Field label="Gender">
 
-                  <RadioGroup defaultValue="1">
-                    <HStack gap="6">
-                      <Radio value="Male"> Male</Radio>
-                      <Radio value="Female"> Female</Radio>
-                      <Radio value="Non-Binary"> Non-Binary</Radio>
-                    </HStack>
-                  </RadioGroup>
+                    <RadioGroup defaultValue="" onValueChange={(e) => setNewStudent({ ...newStudent, gender: e.value })}>
+                      <HStack gap="6">
+                        <Radio value="Male"> Male</Radio>
+                        <Radio value="Female"> Female</Radio>
+                        <Radio value="Non-Binary"> Non-Binary</Radio>
+                      </HStack>
+                    </RadioGroup>
                   </Field>
 
                   {/* Student Disability field */}
@@ -261,12 +283,12 @@ const addStudent = () => {
                     errorText={errors.primaryPhone?.message}
                   >
                     <Input
-                    max={99999999999}
+                      max={99999999999}
                       type="number"
                       {...register("primaryPhone", {
                         required: "Primary phone number is required",
                       })}
-                      
+
                       onChange={(e) =>
                         setNewStudent({ ...newStudent, primaryContact: e.target.value })
                       }
@@ -280,12 +302,12 @@ const addStudent = () => {
                     errorText={errors.secondaryPhone?.message}
                   >
                     <Input
-                    max={99999999999}
+                      max={99999999999}
                       type="number"
                       {...register("secondaryPhone", {
                         required: "Secondary phone number is required",
                       })}
-                      
+
                       onChange={(e) =>
                         setNewStudent({ ...newStudent, secondaryContact: e.target.value })
                       }
@@ -302,20 +324,20 @@ const addStudent = () => {
                       {...register("address", {
                         required: "Home Address is required",
                       })}
-                      
+
                       onChange={(e) =>
                         setNewStudent({ ...newStudent, homeAddress: e.target.value })
                       }
                     ></Input>
                   </Field>
                   <Form.Group className="mb-3 " controlId="Image">
-                                <Form.Label>Pick an Image</Form.Label>
-                                <Form.Control type="file" placeholder="Select an Image from file" accept="image/png, image/jpg" onChange={handleImage} />
+                    <Form.Label>Pick an Image</Form.Label>
+                    <Form.Control type="file" placeholder="Select an Image from file" accept="image/png, image/jpg" onChange={handleImage} />
 
-                            </Form.Group>
+                  </Form.Group>
                   <Button type="submit" colorPalette={"blue"}>
-                  Submit
-                </Button>
+                    Submit
+                  </Button>
                 </form>
               </Modal.Body>
             </Modal>
@@ -325,7 +347,39 @@ const addStudent = () => {
       </div>
 
       {/* Student Accordion */}
+      <Table.Root size="lg" marginTop={10} marginBottom={10}>
+        {/* <Table.Header>
+        <Table.Row>
+          <Table.ColumnHeader>Product</Table.ColumnHeader>
+          <Table.ColumnHeader>Category</Table.ColumnHeader>
+          <Table.ColumnHeader textAlign="end">Price</Table.ColumnHeader>
+        </Table.Row>
+      </Table.Header> */}
+        <Table.Body>
+          {data.filter((student) => !student.isDeleted).map((student) => (
 
+            <Table.Row key={student.id}>
+              <Table.Cell className="d-flex">
+                {student.profilePicture == "" ? <Icon fontSize="3em" margin={3}><RxAvatar /></Icon> : <Image src={student.profilePicture}
+                  alt={`${student.lastName}, ${student.firstName} profile picture`}
+                  width="5em"
+                  padding={3}
+                />}
+
+
+                {student.lastName}, {student.firstName}
+
+
+
+                <IconButton onClick={() => removeStudent(student.id)}><FaRegTrashAlt /></IconButton>
+
+
+
+              </Table.Cell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table.Root>
     </>
   );
 };
