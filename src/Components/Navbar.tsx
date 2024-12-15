@@ -26,11 +26,9 @@ const NavbarComponent = () => {
                     <div className="right-links">
 
                         <Link to={'/Dashboard'} className='navTextRight'>Dashboard</Link>
-<<<<<<<<< Temporary merge branch 1
+
                         <Link to={'/Login'} className='navTextRight'>Login</Link>
-=========
-                        <Link to={"Login"} className='navTextRight'>Login</Link>
->>>>>>>>> Temporary merge branch 2
+
                         <Link to={'/CreateAccount'} className='navTextRight'>Create Account</Link>
 
                     </div>
