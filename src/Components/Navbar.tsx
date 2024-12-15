@@ -3,45 +3,41 @@ import Logo from "../assets/Logo.png";
 import { Link, NavLink } from "react-router-dom";
 
 const NavbarComponent = () => {
-  return (
-    <div className="container-fluid">
-    <div className="navbar-wrapper">
-      <Navbar className="custom-navbar" data-bs-theme="dark">
-        <Container>
-          <NavLink to={"/"}>
-            <img src={Logo} alt="Siete Logo" className="sieteLogo" />
-          </NavLink>
-        </Container>
-      </Navbar>
+    return (
+        <div className="navbar-wrapper">
+            <Navbar className="custom-navbar" data-bs-theme="dark">
+                <Container>
+                    <NavLink to={'/'}>
+                    <img
+                            src={Logo} 
+                            alt="Siete Logo" 
+                            className='sieteLogo'
+                        />
+                    </NavLink>
+                </Container>
+            </Navbar>
+            
+            <div className="bottom-bar">
+                <Container className="bottom-bar-content">
+                    <div className="left-links">
+                        <Link to={'/'} className='navTextLeft'>Home</Link>
+                        <Link to={'/Contact'} className='navTextLeft'>Contact Us</Link>
+                    </div>
+                    <div className="right-links">
 
-      <div className="bottom-bar">
-        <Container className="bottom-bar-content">
-          <div className="left-links">
-            <Link to={"/"} className="navTextLeft">
-              Home
-            </Link>
-            <Link to={"/Contact"} className="navTextLeft">
-              Contact Us
-            </Link>
-          </div>
-          <div className="right-links">
-            <Link to={"/Dashboard"} className="navTextRight">
-              Dashboard
-            </Link>
+                        <Link to={'/Dashboard'} className='navTextRight'>Dashboard</Link>
+<<<<<<<<< Temporary merge branch 1
+                        <Link to={'/Login'} className='navTextRight'>Login</Link>
+=========
+                        <Link to={"Login"} className='navTextRight'>Login</Link>
+>>>>>>>>> Temporary merge branch 2
+                        <Link to={'/CreateAccount'} className='navTextRight'>Create Account</Link>
 
-            <Link to={"/Login"} className="navTextRight">
-              Login
-            </Link>
-
-            <Link to={"/CreateAccount"} className="navTextRight">
-              Create Account
-            </Link>
-          </div>
-        </Container>
-      </div>
-    </div>
-    </div>
-  );
+                    </div>
+                    </Container>
+            </div>
+        </div>
+    );
 };
 
 export default NavbarComponent;
