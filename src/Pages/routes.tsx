@@ -7,6 +7,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import ContactUs from "./ContactUs";
 import StudentProfile from "./StudentProfile";
 import Layout from "../components/Layout";
+import ThankYou from "./ThankYou";
 
 const router = createBrowserRouter([
     
@@ -17,7 +18,8 @@ const router = createBrowserRouter([
             {path:'Login' ,element: <Login/>},
             {path:'Dashboard', element: <Dashboard/>},
             {path:'Student/:slug', element: <StudentProfile/>},
-            {path:'Contact', element: <ContactUs/>}
+            {path:'Contact', element: <ContactUs/>},
+            {path:'ThankYou', element: <ThankYou/>}
 
         ]
     }
