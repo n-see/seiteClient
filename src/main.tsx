@@ -6,8 +6,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 import { Provider } from './components/ui/provider.tsx'
 import { RouterProvider } from 'react-router-dom'
 import router from './Pages/routes.tsx'
-import NavbarComponent from './components/Navbar.tsx'
-import FooterComponent from './components/Footer.tsx'
+
 
 
 
