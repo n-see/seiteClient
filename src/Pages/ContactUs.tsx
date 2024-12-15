@@ -1,13 +1,21 @@
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
-function ContactForm() {
+import { Container } from "@chakra-ui/react";
+import React from "react";
+import { Form, Button, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router";
+
+const ContactForm = () => {
+
+  const navigate = useNavigate() 
+
+
   return (
     <>
      <h2 className="contactUs">Contact Us</h2>
   
-    <Container className="container-fluid">
-      <Row className="justify-content-center">
-        <Col md={11} lg={11} className="p-4">
+    <Container>
+      <Row>
+        <Col>
           <div className="bg-light rounded shadow">
            
             <p className="text-muted mb-3">
@@ -75,6 +83,7 @@ function ContactForm() {
                 />
               </Form.Group>
               <Button
+              onClick={() => navigate('/ThankYou')}
                 type="submit"
                 className="submitButton"
                 style={{

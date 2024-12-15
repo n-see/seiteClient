@@ -10,6 +10,7 @@ html, body{
 
 .navbar-wrapper {
   position: relative;
+
 }
 
 .custom-navbar {
@@ -138,3 +139,30 @@ position:relative;
   font-weight: bold;
 }
 
+.carousel-indicators button {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #000;
+}
+
+.carousel-inner .row {
+  display: flex;
+}
+
+.carousel-inner img {
+  object-fit: cover;
+}
+
+
+.teacherStudent{
+ margin-left:10%;
+ max-width: 100%;
+ height: auto;
+}
+
+@media (max-width: 768px) {
+  img {
+    max-width: 80%;
+  }
+}

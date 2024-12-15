@@ -1,7 +1,6 @@
-import { Navbar,Container } from 'react-bootstrap';
-import Logo from '../assets/Logo.png'
-import { Link, NavLink } from 'react-router-dom';
-
+import { Navbar, Container } from "react-bootstrap";
+import Logo from "../assets/Logo.png";
+import { Link, NavLink } from "react-router-dom";
 
 const NavbarComponent = () => {
     return (
@@ -27,9 +26,11 @@ const NavbarComponent = () => {
                     <div className="right-links">
 
                         <Link to={'/Dashboard'} className='navTextRight'>Dashboard</Link>
-
+<<<<<<<<< Temporary merge branch 1
                         <Link to={'/Login'} className='navTextRight'>Login</Link>
-
+=========
+                        <Link to={"Login"} className='navTextRight'>Login</Link>
+>>>>>>>>> Temporary merge branch 2
                         <Link to={'/CreateAccount'} className='navTextRight'>Create Account</Link>
 
                     </div>
