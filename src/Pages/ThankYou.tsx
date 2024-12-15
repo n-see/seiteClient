@@ -1,7 +1,7 @@
 
 import { Container } from "react-bootstrap";
 
-function ThankYouPage() {
+const ThankYouPage = () => {
   return (
     <Container
       fluid
