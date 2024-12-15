@@ -7,7 +7,7 @@ const NavbarComponent = () => {
     return (
         <Box className="navbar-wrapper">
         <Navbar className="custom-navbar" data-bs-theme="dark">
-          <Container>
+          <Container fluid>
             <NavLink to="/">
               <img src={Logo} alt="Siete Logo" className="sieteLogo" />
             </NavLink>
