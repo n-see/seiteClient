@@ -2,7 +2,7 @@
 import { Button, Container, DialogActionTrigger, DialogCloseTrigger, DialogFooter, Flex, Grid, GridItem, Icon, Image, Input, Link, Table, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Form, useLocation, useNavigate } from 'react-router-dom'
+import { Form, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { BASE_URL } from '../constant';
 import { RxAvatar } from 'react-icons/rx';
 import { DialogBody, DialogContent, DialogHeader, DialogRoot, DialogTitle, DialogTrigger } from '../components/ui/dialog';
@@ -37,9 +37,9 @@ interface Goal {
 
 const StudentProfile = () => {
   let navigate = useNavigate();
-  // const prams = useParams;
+  const prams = useParams;
 
-  // const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const location = useLocation();
   console.log(location)
 

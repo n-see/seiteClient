@@ -1,4 +1,4 @@
-import { Button, HStack, Icon, IconButton, Input, Table } from "@chakra-ui/react";
+import { Button, HStack, Icon, IconButton, Input, Link, Table, Text } from "@chakra-ui/react";
 import "./dashboard.css";
 import { Form, Modal } from "react-bootstrap";
 import { useEffect, useState } from "react";
@@ -359,15 +359,17 @@ const Dashboard = () => {
           {data.filter((student) => !student.isDeleted).map((student) => (
 
             <Table.Row key={student.id}>
-              <Table.Cell className="d-flex">
+              <Table.Cell className="d-flex" >
                 {student.profilePicture == "" ? <Icon fontSize="3em" margin={3}><RxAvatar /></Icon> : <Image src={student.profilePicture}
                   alt={`${student.lastName}, ${student.firstName} profile picture`}
                   width="5em"
                   padding={3}
                 />}
-
+                {}
+                <Link onClick={() => navigate("/student/" + student.id)}>
 
                 {student.lastName}, {student.firstName}
+                </Link>
 
 
 
