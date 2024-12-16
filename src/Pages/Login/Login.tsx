@@ -124,10 +124,8 @@ const Login = () => {
                 </Button>
               
           </div>
-          <div className="col"></div>
         </div>
         <Text> Due to the confidentiality of student data, do not save your password to your internet browser.</Text>
-      {/* </div> */}
       </Container>
     </>
   )

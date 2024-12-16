@@ -1,13 +1,10 @@
-
 import { Container } from "@chakra-ui/react";
-import React from "react";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
 const ContactForm = () => {
 
   const navigate = useNavigate() 
-
 
   return (
     <>
