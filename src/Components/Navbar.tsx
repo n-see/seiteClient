@@ -5,6 +5,7 @@ import { Box, Flex } from "@chakra-ui/react";
 
 const NavbarComponent = () => {
     return (
+
         <Box className="navbar-wrapper">
         <Navbar className="custom-navbar" data-bs-theme="dark">
           <Container fluid>
@@ -43,6 +44,7 @@ const NavbarComponent = () => {
           </Container>
         </Box>
       </Box>
+
     );
   };
   
