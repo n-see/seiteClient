@@ -17,7 +17,7 @@ const FooterComponent = () => {
         >
           <Box flex={{ base: "100%", md: "30%" }}>
             <Text fontSize="lg" fontWeight="bold" mb={4}>
-              About SEIS
+              About SEITE
             </Text>
             <Text fontSize="sm" lineHeight="1.6">
             SEITE is managed and maintained by NaN, a department of the Supportive
