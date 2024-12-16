@@ -76,7 +76,7 @@ const FooterComponent = () => {
                 color="white"
                 textDecoration="underline-on-hover"
               >
-                EdConnect.org
+                EDCONNECT.org
               </Link>{" "}
               to view our open positions.
             </Text>
