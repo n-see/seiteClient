@@ -83,9 +83,9 @@ const Login = () => {
   const onSubmit = handleSubmit(() => login());
   return (
     <>
-      {/* <div className="container loginBox d-flex-justify-content-center"> */}
-      <Container>
-      <Text>Login</Text>
+     <Text className="loginText">Login</Text>
+      <Container className="p-4 bg-white shadow rounded loginContainer">
+     
 
      
         <div className="row">
@@ -122,6 +122,14 @@ const Login = () => {
                 <Button type="submit" colorPalette={"blue"} onClick={onSubmit}>
                   Login
                 </Button>
+                <Button
+          type="submit"
+          colorPalette={"blue"}
+          onClick={onSubmit}
+          className="ms-3"
+        >
+          Google Login
+        </Button>
               
           </div>
         </div>

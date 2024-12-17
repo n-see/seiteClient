@@ -1,4 +1,21 @@
-.loginBox {
-    border: black solid 1px;
-    padding-top: 4px;
-  }
+    .loginText{
+        color: black;
+        font-size: 30px;
+        margin-top: 10px;
+        margin-left:95px;
+    }
+
+    .loginContainer {
+        margin-right: 170px;
+        margin-bottom: 50px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border-radius: 0.5rem;
+        max-width: 1200px;
+        width: 100%;
+        
+        }
+    
+        .loginContainer .form-control {
+            width: 100px;
+            }
