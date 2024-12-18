@@ -40,12 +40,12 @@ const Login = () => {
     formState: { errors },
   } = useForm<FormValues>();
 
- const login = async () => {
   let userData= {
     id:0,
     username: user.username,
     password: user.password
   }
+ const login = async () => {
   let token = await axiosLogin(userData)
   if (token != null) {
     localStorage.setItem("Token", token);
@@ -79,6 +79,8 @@ const Login = () => {
       console.log(userData)
       localStorage.setItem("UserData", JSON.stringify(userData) )
 }
+
+
 
   const onSubmit = handleSubmit(() => login());
   return (
